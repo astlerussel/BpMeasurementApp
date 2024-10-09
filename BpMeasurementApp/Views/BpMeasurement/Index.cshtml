@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BpMeasurement>
+@{
+    var lastActionMessage = ViewBag.LastActionMessage as string;
+}
+
+@if (!string.IsNullOrEmpty(lastActionMessage))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @lastActionMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<h2>All Measurements</h2>
+<p>
+    <a asp-action="Create">Add new BP measurement</a> |
+    <a asp-action="InfoOnBP">Information on BP measurements</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Reading</th>
+            <th>Category</th>
+            <th>Position</th>
+            <th>Date Taken</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string categoryColor = item.Category switch
+            {
+                "Normal" => "green",
+                "Elevated" => "blue",
+                "Hypertension Stage 1" => "orange",
+                "Hypertension Stage 2" => "orangered",
+                "Hypertensive Crisis" => "darkred",
+                _ => "black"
+            };
+
+            <tr >
+                <td style="color:@categoryColor">@item.Systolic/@item.Diastolic</td>
+
+                <td style="color:@categoryColor">@item.Category</td>
+                <td>@item.Position.Name</td>
+                <td>@item.MeasurementDate.ToShortDateString()</td>
+                
+                
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>  | 
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

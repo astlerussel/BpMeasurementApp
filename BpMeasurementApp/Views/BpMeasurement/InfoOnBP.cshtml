@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Information on BP Measurements";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="content">
+    <h2>Understanding Blood Pressure Measurements</h2>
+    <p>Blood pressure is measured using two numbers: systolic and diastolic. Here’s a brief explanation:</p>
+    <ul>
+        <li><strong>Systolic:</strong> The top number, representing the pressure in your arteries when your heart beats.</li>
+        <li><strong>Diastolic:</strong> The bottom number, representing the pressure in your arteries when your heart is at rest between beats.</li>
+    </ul>
+
+    <h3>Blood Pressure Categories</h3>
+
+    <img src="~/images/blood-pressure-chart.png" alt="Blood Pressure Categories Chart" class="img-fluid" />
+
+    <p>For more detailed information, consult with your healthcare provider.</p>
+</div>
+
+<a asp-controller="BpMeasurement" asp-action="Index" class="btn btn-secondary">Back to All Measurements</a>
